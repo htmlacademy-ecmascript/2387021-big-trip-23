@@ -1,23 +1,28 @@
-// import {render} from '../render.js';
+import TripInfoView from '../view/trip-info-view.js';
+import FilterEventsView from '../view/filter-events-view.js';
+import SortEventsView from '../view/sort-events-view.js';
+import PointsListView from '../view/points-list-view.js';
+import NewPointView from '../view/new-point-view.js';
+import EditPointView from '../view/edit-point-view.js';
+import TripPointView from '../view/trip-point-view.js';
+import {render, RenderPosition} from '../render.js';
+import {tripMain, siteHeaderFilter, siteBodyContent} from '../main.js';
 
-// export default class BoardPresenter {
-//   boardComponent = new BoardView();
-//   taskListComponent = new TaskListView();
+const RENDER_QUANTITY = 3;
 
-//   constructor({boardContainer}) {
-//     this.boardContainer = boardContainer;
-//   }
+export default class BoardPresenter {
+  listComponent = new PointsListView();
 
-//   init() {
-//     render(this.boardComponent, this.boardContainer);
-//     render(new SortView(), this.boardComponent.getElement());
-//     render(this.taskListComponent, this.boardComponent.getElement());
-//     render(new TaskEditView(), this.taskListComponent.getElement());
+  init() {
+    render(new TripInfoView, tripMain, RenderPosition.AFTERBEGIN);
+    render(new FilterEventsView, siteHeaderFilter);
+    render(new SortEventsView, siteBodyContent, RenderPosition.AFTERBEGIN);
+    render(this.listComponent, siteBodyContent);
+    render(new NewPointView, this.listComponent.getElement(), RenderPosition.AFTERBEGIN);
+    // render(new EditPointView, this.listComponent.getElement());
 
-//     for (let i = 0; i < 3; i++) {
-//       render(new TaskView(), this.taskListComponent.getElement());
-//     }
-
-//     render(new LoadMoreButtonView(), this.boardComponent.getElement());
-//   }
-// }
+    for (let i = 0; i < RENDER_QUANTITY; i++) {
+      render(new TripPointView, this.listComponent.getElement());
+    }
+  }
+}
