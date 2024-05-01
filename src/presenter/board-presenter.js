@@ -8,12 +8,17 @@ import TripPointView from '../view/trip-point-view.js';
 import {render, RenderPosition} from '../render.js';
 import {tripMain, siteHeaderFilter, siteBodyContent} from '../main.js';
 
-const RENDER_QUANTITY = 3;
-
 export default class BoardPresenter {
   listComponent = new PointsListView();
 
+  constructor({pointsContainer, pointsModel}) {
+    this.pointsContainer = pointsContainer;
+    this.pointsModel = pointsModel;
+  }
+
   init() {
+    this.boardPoints = [...this.pointsModel.getPoints()];
+
     render(new TripInfoView, tripMain, RenderPosition.AFTERBEGIN);
     render(new FilterEventsView, siteHeaderFilter);
     render(new SortEventsView, siteBodyContent, RenderPosition.AFTERBEGIN);
@@ -21,8 +26,8 @@ export default class BoardPresenter {
     render(new NewPointView, this.listComponent.getElement(), RenderPosition.AFTERBEGIN);
     // render(new EditPointView, this.listComponent.getElement());
 
-    for (let i = 0; i < RENDER_QUANTITY; i++) {
-      render(new TripPointView, this.listComponent.getElement());
+    for (let i = 0; i < this.boardPoints.length; i++) {
+      render(new TripPointView({point: this.boardPoints[i]}), this.listComponent.getElement());
     }
   }
 }
