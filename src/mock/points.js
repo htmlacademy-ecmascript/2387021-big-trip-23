@@ -1,50 +1,135 @@
-import {getRandomArrayElement} from '../utils.js';
-import {FILTERS, SORT, POINT_TYPE, CITIES, OFFERS, DESCRIPTION, PRICES, PHOTO} from '../const.js';
+import {getRandomArrayElement, getRandomPhotoURL} from '../utils.js';
+import {FILTERS, SORT, POINT_TYPE, CITIES, OFFERS, DESCRIPTION, PRICES} from '../const.js';
+
+const mockDestination = [
+  {
+    id: '1',
+    description: getRandomArrayElement(DESCRIPTION),
+    name: getRandomArrayElement(CITIES),
+    pictures: [
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №1'
+      }
+    ]
+  },
+  {
+    id: '2',
+    description: getRandomArrayElement(DESCRIPTION),
+    name: getRandomArrayElement(CITIES),
+    pictures: [
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №2'
+      },
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №3'
+      }
+    ]
+  },
+  {
+    id: '3',
+    description: getRandomArrayElement(DESCRIPTION),
+    name: getRandomArrayElement(CITIES),
+    pictures: [
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №4'
+      },
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №5'
+      },
+      {
+        src: getRandomPhotoURL(),
+        description: 'description №6'
+      }
+    ]
+  }
+];
+
+const mockOffers = [
+  {
+    type: getRandomArrayElement(POINT_TYPE),
+    offers: [
+      {
+        id: 'id_1',
+        title: getRandomArrayElement(OFFERS),
+        price: getRandomArrayElement(PRICES)
+      }
+    ]
+  },
+  {
+    type: getRandomArrayElement(POINT_TYPE),
+    offers: [
+      {
+        id: 'id_2',
+        title: getRandomArrayElement(OFFERS),
+        price: getRandomArrayElement(PRICES)
+      },
+      {
+        id: 'id_3',
+        title: getRandomArrayElement(OFFERS),
+        price: getRandomArrayElement(PRICES)
+      }
+    ]
+  },
+  {
+    type: getRandomArrayElement(POINT_TYPE),
+    offers: [
+      {
+        id: 'id_4',
+        title: getRandomArrayElement(OFFERS),
+        price: getRandomArrayElement(PRICES)
+      }
+    ]
+  }
+];
+
 
 const mockPoints = [
   {
-    'type': getRandomArrayElement(POINT_TYPE),
-    'destination': getRandomArrayElement(CITIES),
-    'date_from': '2019-07-10T22:55:56.845Z',
-    'date_to': '2019-07-11T11:22:13.375Z',
-    'base_price': getRandomArrayElement(PRICES),
-    'offers': [
-      getRandomArrayElement(OFFERS)
+    id: '001',
+    basePrice: getRandomArrayElement(PRICES),
+    dateFrom: '2019-07-10T09:15:56.845Z',
+    dateTo: '2019-07-11T04:55:13.375Z',
+    destination: mockDestination[0],
+    isFavorite: false,
+    offers: [
+      mockOffers[0].offers[0]
     ],
-    'is_favorite': true,
+    type: mockOffers[0].type
   },
   {
-    'type': getRandomArrayElement(POINT_TYPE),
-    'destination': getRandomArrayElement(CITIES),
-    'date_from': '2019-07-10T22:55:56.845Z',
-    'date_to': '2019-07-11T11:22:13.375Z',
-    'base_price': getRandomArrayElement(PRICES),
-    'offers': [
-      getRandomArrayElement(OFFERS)
+    id: '002',
+    basePrice: getRandomArrayElement(PRICES),
+    dateFrom: '2019-07-10T09:15:56.845Z',
+    dateTo: '2019-07-11T04:55:13.375Z',
+    destination: mockDestination[1],
+    isFavorite: true,
+    offers: [
+      mockOffers[1].offers[0],
+      mockOffers[1].offers[1]
     ],
-    'is_favorite': false,
+    type: mockOffers[1].type
   },
   {
-    'type': getRandomArrayElement(POINT_TYPE),
-    'destination': getRandomArrayElement(CITIES),
-    'date_from': '2019-07-10T22:55:56.845Z',
-    'date_to': '2019-07-11T11:22:13.375Z',
-    'base_price': getRandomArrayElement(PRICES),
-    'offers': [
-      getRandomArrayElement(OFFERS)
+    id: '003',
+    basePrice: getRandomArrayElement(PRICES),
+    dateFrom: '2019-07-10T09:15:56.845Z',
+    dateTo: '2019-07-11T04:55:13.375Z',
+    destination: mockDestination[2],
+    isFavorite: false,
+    offers: [
+      mockOffers[2].offers[0]
     ],
-    'is_favorite': true,
-  },
+    type: mockOffers[2].type
+  }
 ];
 
 function getRandomPoint() {
   return getRandomArrayElement(mockPoints);
 }
-
-const mockEditForm = [
-  {
-
-  }
-];
 
 export {getRandomPoint};
