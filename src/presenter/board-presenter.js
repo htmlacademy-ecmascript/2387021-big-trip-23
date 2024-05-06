@@ -20,8 +20,6 @@ export default class BoardPresenter {
     render(this.listComponent, this.container);
     render(new NewPointView({point: this.points[0]}), this.listComponent.getElement(), RenderPosition.AFTERBEGIN);
 
-    for (let i = 0; i < this.points.length; i++) {
-      render(new TripPointView({point: this.points[i]}), this.listComponent.getElement(), RenderPosition.BEFOREEND);
-    }
+    this.points.forEach((point) => render(new TripPointView({point: point}), this.listComponent.getElement(), RenderPosition.BEFOREEND));
   }
 }

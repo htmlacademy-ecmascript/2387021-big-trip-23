@@ -1,5 +1,5 @@
 import {createElement} from '../render.js';
-import {FLIGHT_OFFERS, POINT_TYPE} from '../const.js';
+import {FLIGHT_OFFERS, POINT_TYPE} from '../mock/mock-const.js';
 
 const BLANK_FORM = {
   basePrice: '',

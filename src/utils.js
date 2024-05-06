@@ -1,9 +1,5 @@
 import dayjs from 'dayjs';
-import {DATE_FORMAT, TIME_FORMAT, PHOTO} from './const.js';
-
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
-}
+import {DATE_FORMAT, TIME_FORMAT} from './const.js';
 
 function humanizeDueDate(dueDate) {
   return dueDate ? dayjs(dueDate).format(DATE_FORMAT) : '';
@@ -28,20 +24,17 @@ function getDuration(startTime, endTime) {
 
   if (days > 0) {
     return `${days.toString().padStart(2, '0')}D ${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
-  } else if (hours > 0) {
-    return `${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
-  } else {
-    return `${minutes.toString().padStart(2, '0')}M`;
   }
+
+  if (hours > 0) {
+    return `${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
+  }
+
+  return `${minutes.toString().padStart(2, '0')}M`;
 }
 
 function getActiveClass(isActive, acriveClass) {
   return isActive ? acriveClass : '';
 }
 
-function getRandomPhotoURL() {
-  const randomNumber = Math.floor(Math.random() * 10) + 1;
-  return `${PHOTO}${randomNumber}`;
-}
-
-export {getRandomArrayElement, humanizeDueDate, humanizeDueTime, getDuration, getActiveClass, getRandomPhotoURL};
+export {humanizeDueDate, humanizeDueTime, getDuration, getActiveClass};
