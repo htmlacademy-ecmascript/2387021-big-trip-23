@@ -74,7 +74,6 @@ function createDestinationTemplate (description, pictures) {
 
 function createNewPointView(formData) {
   const {type, destination, basePrice, offers} = formData;
-console.log(formData)
   const offersTemplate = createOffersTemplate(offers);
   const destinationTemplate = createDestinationTemplate(destination.description, destination.pictures);
 
