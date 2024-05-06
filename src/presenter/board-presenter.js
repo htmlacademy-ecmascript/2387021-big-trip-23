@@ -11,6 +11,8 @@ export default class BoardPresenter {
   constructor({container, pointsModel}) {
     this.container = container;
     this.pointsModel = pointsModel;
+    this.destinations = this.pointsModel.getDestinations();
+    this.offers = this.pointsModel.getOffers();
   }
 
   init() {
@@ -18,8 +20,8 @@ export default class BoardPresenter {
 
     render(this.sortComponent, this.container, RenderPosition.AFTERBEGIN);
     render(this.listComponent, this.container);
-    render(new NewPointView({point: this.points[0]}), this.listComponent.getElement(), RenderPosition.AFTERBEGIN);
+    render(new NewPointView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.listComponent.getElement(), RenderPosition.AFTERBEGIN);
 
-    this.points.forEach((point) => render(new TripPointView({point: point}), this.listComponent.getElement(), RenderPosition.BEFOREEND));
+    this.points.forEach((point) => render(new TripPointView({point, destinations: this.destinations, offers: this.offers}), this.listComponent.getElement(), RenderPosition.BEFOREEND));
   }
 }

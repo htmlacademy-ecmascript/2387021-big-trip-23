@@ -96,10 +96,8 @@ function createNewPointView(formData) {
     </div>
 
     <div class="event__field-group  event__field-group--destination">
-      <label class="event__label  event__type-output" for="event-destination-1">
-      ${type}
-      </label>
-      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destination}" list="destination-list-1">
+      <label class="event__label  event__type-output" for="event-destination-1">${type}</label>
+      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destination.name}" list="destination-list-1">
       <datalist id="destination-list-1">
         <option value="Amsterdam"></option>
         <option value="Geneva"></option>
@@ -135,12 +133,14 @@ function createNewPointView(formData) {
 }
 
 export default class NewPointView {
-  constructor({form = BLANK_FORM}) {
-    this.form = form;
+  constructor({point = BLANK_FORM, destinations, offers}) {
+    this.point = point;
+    this.destinations = destinations;
+    this.offers = offers;
   }
 
   getTemplate() {
-    return createNewPointView(this.form);
+    return createNewPointView(this.point, this.destinations, this.offers);
   }
 
   getElement() {

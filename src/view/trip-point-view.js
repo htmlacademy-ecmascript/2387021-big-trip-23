@@ -62,12 +62,14 @@ function createTripPointView(point) {
 }
 
 export default class TripPointView {
-  constructor({point}) {
+  constructor({point, destinations, offers}) {
     this.point = point;
+    this.destinations = destinations;
+    this.offers = offers;
   }
 
   getTemplate() {
-    return createTripPointView(this.point);
+    return createTripPointView(this.point, this.destinations, this.offers);
   }
 
   getElement() {
