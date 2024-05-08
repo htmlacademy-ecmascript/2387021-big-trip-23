@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import {FLIGHT_OFFERS, POINT_TYPE} from '../mock/mock-const.js';
 
 const BLANK_FORM = {
@@ -132,26 +132,19 @@ function createNewPointView(formData) {
 </li>`;
 }
 
-export default class NewPointView {
+export default class NewPointView extends AbstractView {
+  #point = null;
+  #destinations = null;
+  #offers = null;
+
   constructor({point = BLANK_FORM, destinations, offers}) {
-    this.point = point;
-    this.destinations = destinations;
-    this.offers = offers;
+    super();
+    this.#point = point;
+    this.#destinations = destinations;
+    this.#offers = offers;
   }
 
-  getTemplate() {
-    return createNewPointView(this.point, this.destinations, this.offers);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createNewPointView(this.#point, this.#destinations, this.#offers);
   }
 }
