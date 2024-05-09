@@ -1,6 +1,6 @@
 
 const PHOTO = 'https://loremflickr.com/248/152?random=';
-const POINT_COUNT = 3;
+const POINT_COUNT = 10;
 const POINT_TYPE = ['Taxi', 'Bus', 'Train', 'Ship', 'Drive', 'Flight', 'Check-in', 'Sightseeing', 'Restaurant'];
 const CITIES = ['Moscow', 'Rome', 'Paris', 'Lisboa', 'New York'];
 const OFFERS = ['Order Uber', 'Add luggage', 'Rent a car', 'Add breakfast'];
