@@ -7,8 +7,6 @@ import {render, replace, RenderPosition} from '../framework/render.js';
 export default class BoardPresenter {
   #container = null;
   #pointsModel = null;
-  // #destinations = null;
-  // #offers = null;
   #points = [];
 
   #sortComponent = new SortEventsView();
@@ -34,17 +32,17 @@ export default class BoardPresenter {
     const escKeyDownHandler = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
-        replaceFormToEvent();
+        replaceFormToPoint();
         document.removeEventListener('keydown', escKeyDownHandler);
       }
     };
 
-    const eventComponent = new TripPointView({
+    const pointComponent = new TripPointView({
       point,
       destinations: this.#pointsModel.destinations,
       offers: this.#pointsModel.offers,
       onEditClick: () => {
-        replaceEventToForm();
+        replacePointToForm();
         document.addEventListener('keydown', escKeyDownHandler);
       }
     });
@@ -54,19 +52,23 @@ export default class BoardPresenter {
       destinations: this.#pointsModel.destinations,
       offers: this.#pointsModel.offers,
       onFormSubmit: () => {
-        replaceFormToEvent();
+        replaceFormToPoint();
+        document.removeEventListener('keydown', escKeyDownHandler);
+      },
+      onEditClick: () => {
+        replaceFormToPoint();
         document.removeEventListener('keydown', escKeyDownHandler);
       }
     });
 
-    function replaceEventToForm() {
-      replace(formComponent, eventComponent);
+    function replacePointToForm() {
+      replace(formComponent, pointComponent);
     }
 
-    function replaceFormToEvent () {
-      replace(eventComponent, formComponent);
+    function replaceFormToPoint () {
+      replace(pointComponent, formComponent);
     }
 
-    render(eventComponent, this.#listComponent.element, RenderPosition.BEFOREEND);
+    render(pointComponent, this.#listComponent.element, RenderPosition.BEFOREEND);
   }
 }

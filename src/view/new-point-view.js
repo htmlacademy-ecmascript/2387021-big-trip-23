@@ -122,10 +122,10 @@ function createNewPointView(formData) {
     </div>
 
     <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-    <button class="event__reset-btn" type="reset">Cancel</button>
+    <button class="event__reset-btn" type="reset">Delete</button>
     <button class="event__rollup-btn" type="button">
-    <span class="visually-hidden">Open event</span>
-  </button>
+      <span class="visually-hidden">Open event</span>
+    </button>
   </header>
   <section class="event__details">
   ${offersTemplate}
@@ -140,15 +140,18 @@ export default class NewPointView extends AbstractView {
   #destinations = null;
   #offers = null;
   #handleFormSubmit = null;
+  #handleEditClick = null;
 
-  constructor({point = BLANK_FORM, destinations, offers, onFormSubmit}) {
+  constructor({point = BLANK_FORM, destinations, offers, onFormSubmit, onEditClick}) {
     super();
     this.#point = point;
     this.#destinations = destinations;
     this.#offers = offers;
     this.#handleFormSubmit = onFormSubmit;
+    this.#handleEditClick = onEditClick;
 
     this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#editClickHandler);
   }
 
   get template() {
@@ -158,5 +161,10 @@ export default class NewPointView extends AbstractView {
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
     this.#handleFormSubmit();
+  };
+
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleEditClick();
   };
 }
